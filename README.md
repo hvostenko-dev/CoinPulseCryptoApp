@@ -1,36 +1,107 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CoinPulse — Cryptocurrency Analytics & Live Market Tracker
 
-## Getting Started
+Modern cryptocurrency analytics platform and live market tracker built with **Next.js 16 (App Router)**, **React 19**, **TypeScript**, **Tailwind CSS v4**, **shadcn/ui**, **TradingView Lightweight Charts**, and the **CoinGecko API**.
 
-First, run the development server:
+[![Next.js](https://img.shields.io/badge/Next.js-16.2-black?logo=next.js)](https://nextjs.org/)
+[![React](https://img.shields.io/badge/React-19.2-61DAFB?logo=react&logoColor=black)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4-38B2AC?logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+
+---
+
+## ✨ Features
+
+- **Market Overview & Trending Coins:** Track global market metrics, trending cryptocurrencies, and top categories in real time.
+- **Interactive OHLC Candlestick Charts:** Powered by **TradingView Lightweight Charts** (`lightweight-charts`) with multiple timeframes (`1D`, `1W`, `1M`, `3M`, `6M`, `1Y`, `Max`) and custom dark-mode styling.
+- **Detailed Coin Analytics (`/coins/[id]`):** Deep-dive into individual assets with price change metrics (24h / 30d), market cap, volume, on-chain pool discovery, and recent trades.
+- **Built-in Crypto Converter:** Instant currency conversion across supported fiat and crypto pairs.
+- **Fast Global Search:** Instant modal search (`/api/search`) with debounced queries and server-side caching.
+- **Paginated All-Coins Directory (`/coins`):** Browse and filter the broader cryptocurrency market with custom reusable `DataTable` and `CoinsPagination` components.
+
+---
+
+## 🛠 Tech Stack
+
+| Layer | Technology |
+| :--- | :--- |
+| **Framework** | Next.js 16.2 (App Router, React Server Components, Server Actions) |
+| **Language** | TypeScript 5 |
+| **UI & Styling** | React 19, Tailwind CSS v4, shadcn/ui (`base-maia`), Radix UI, Base UI |
+| **Charts** | TradingView Lightweight Charts v5 (`lightweight-charts`) |
+| **Icons** | Lucide React, Hugeicons |
+| **Data & API** | CoinGecko REST & On-Chain API, `query-string` |
+
+---
+
+## 📁 Project Structure
+
+```text
+CoinPulseCryptoApp/
+├── app/
+│   ├── api/search/route.ts       # Coin search API route handler
+│   ├── coins/
+│   │   ├── [id]/page.tsx         # Coin details, OHLC chart, converter & live data
+│   │   └── page.tsx              # Paginated directory of all coins
+│   ├── globals.css               # Tailwind CSS v4 theme & custom utilities
+│   ├── layout.tsx                # Root layout & navigation header
+│   └── page.tsx                  # Dashboard home (CoinOverview, TrendingCoins, Categories)
+├── components/
+│   ├── home/                     # Home dashboard sections & Suspense fallbacks
+│   ├── ui/                       # Reusable shadcn/ui & Radix primitives
+│   ├── CandlestickChart.tsx      # Interactive TradingView OHLC candlestick chart
+│   ├── CoinHeader.tsx            # Asset header with live price badges
+│   ├── CoinsPagination.tsx       # Pagination controls for coin tables
+│   ├── Converter.tsx             # Crypto-to-fiat & token converter
+│   ├── DataTable.tsx             # Generic typed data table component
+│   ├── Header.tsx                # Top navigation bar
+│   ├── LiveDataWrapper.tsx       # Real-time trades & chart wrapper
+│   └── SearchModal.tsx           # Command/modal search dialog
+├── lib/
+│   ├── coingecko.actions.ts      # Server Actions & typed fetcher for CoinGecko API
+│   └── utils.ts                  # Formatting & class merging utilities
+├── constants.ts                  # Chart themes, timeframe configs & nav links
+└── types.d.ts                    # Global TypeScript interfaces
+```
+
+---
+
+## 🚀 Getting Started
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/ilyajavadeveloper/CoinPulseCryptoApp.git
+cd CoinPulseCryptoApp
+```
+
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+### 3. Configure environment variables
+
+Create a `.env.local` file in the root directory:
+
+```env
+COINGECKO_BASE_URL=https://api.coingecko.com/api/v3
+COINGECKO_API_KEY=your_coingecko_demo_or_pro_api_key
+```
+
+### 4. Run the development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📜 Available Scripts
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `npm run dev` — Start development server at `http://localhost:3000`
+- `npm run build` — Create an optimized production build
+- `npm run start` — Start the production server
+- `npm run lint` — Run ESLint checks
