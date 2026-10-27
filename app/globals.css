@@ -1403,3 +1403,43 @@
         display: none;
     }
 }
+
+
+/* =========================
+   NEXUSFI PRO THEME OVERRIDES
+========================= */
+.dark {
+    --dark-900: #04070e;
+    --dark-700: #050811;
+    --dark-500: #0a101d;
+    --dark-400: #111a2e;
+    --purple-600: #16233b;
+    --purple-100: #94a3b8;
+    --green-500: #10b981;
+    --green-400: #34d399;
+    --green-300: #6ee7b7;
+    --red-500: #f43f5e;
+    --yellow-500: #f59e0b;
+}
+
+@keyframes nexus-marquee-scroll {
+    0% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.nexus-marquee {
+    animation: nexus-marquee-scroll 40s linear infinite;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}

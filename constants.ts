@@ -7,28 +7,44 @@ import {
 
 export const navItems = [
     {
-        label: 'Home',
+        label: 'Terminal',
         href: '/',
     },
     {
-        label: 'Search',
-        href: '/',
-    },
-    {
-        label: 'All Coins',
+        label: 'Screener',
         href: '/coins',
+    },
+    {
+        label: 'Portfolio',
+        href: '/portfolio',
+    },
+    {
+        label: 'Watchlist',
+        href: '/watchlist',
+    },
+    {
+        label: 'Crypto Lab',
+        href: '/lab',
     },
 ];
 
+export const TERMINAL_QUICK_COINS = [
+    { id: 'bitcoin', symbol: 'BTC', name: 'Bitcoin' },
+    { id: 'ethereum', symbol: 'ETH', name: 'Ethereum' },
+    { id: 'solana', symbol: 'SOL', name: 'Solana' },
+    { id: 'binancecoin', symbol: 'BNB', name: 'BNB' },
+    { id: 'ripple', symbol: 'XRP', name: 'XRP' },
+] as const;
+
 const CHART_COLORS = {
-    background: '#0b1116',
-    text: '#8f9fb1',
-    grid: '#1a2332',
-    border: '#1a2332',
-    crosshairVertical: '#ffffff40',
-    crosshairHorizontal: '#ffffff20',
-    candleUp: '#158A6E',
-    candleDown: '#EB1C36',
+    background: '#080d16',
+    text: '#94a3b8',
+    grid: '#131d2e',
+    border: '#1e293b',
+    crosshairVertical: '#10b98166',
+    crosshairHorizontal: '#06b6d444',
+    candleUp: '#10B981',
+    candleDown: '#F43F5E',
 } as const;
 
 export const getCandlestickConfig = (): CandlestickSeriesPartialOptions => ({
@@ -50,10 +66,14 @@ export const getChartConfig = (
         background: { type: ColorType.Solid, color: CHART_COLORS.background },
         textColor: CHART_COLORS.text,
         fontSize: 12,
-        fontFamily: 'Inter, Roboto, "Helvetica Neue", Arial',
+        fontFamily: 'var(--font-geist-mono), Inter, monospace',
     },
     grid: {
-        vertLines: { visible: false },
+        vertLines: {
+            visible: true,
+            color: '#111927',
+            style: 2,
+        },
         horzLines: {
             visible: true,
             color: CHART_COLORS.grid,
@@ -76,18 +96,22 @@ export const getChartConfig = (
             visible: true,
             color: CHART_COLORS.crosshairVertical,
             width: 1,
-            style: 0,
+            style: 2,
         },
         horzLine: {
             visible: true,
             color: CHART_COLORS.crosshairHorizontal,
             width: 1,
-            style: 0,
+            style: 2,
         },
     },
     localization: {
         priceFormatter: (price: number) =>
-            '$' + price.toLocaleString(undefined, { maximumFractionDigits: 2 }),
+            '$' +
+            price.toLocaleString(undefined, {
+                minimumFractionDigits: price < 1 ? 4 : 2,
+                maximumFractionDigits: price < 1 ? 6 : 2,
+            }),
     },
 });
 

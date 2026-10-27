@@ -13,8 +13,9 @@ interface CandlestickChartProps {
     children?: React.ReactNode;
     mode?: 'historical' | 'live';
     initialPeriod?: Period;
-    liveInterval: '1s' | '1m';
-    setLiveInterval: (interval: '1s' | '1m') => void;
+    liveInterval?: '1s' | '1m';
+    setLiveInterval?: (interval: '1s' | '1m') => void;
+    enableCoinSwitcher?: boolean;
 }
 
 interface ConverterProps {
@@ -52,6 +53,7 @@ interface CoinMarketData {
     low_24h: number;
     price_change_24h: number;
     price_change_percentage_24h: number;
+    price_change_percentage_7d_in_currency?: number;
     market_cap_change_24h: number;
     market_cap_change_percentage_24h: number;
     circulating_supply: number;
@@ -64,6 +66,52 @@ interface CoinMarketData {
     atl_change_percentage: number;
     atl_date: string;
     last_updated: string;
+    sparkline_in_7d?: {
+        price: number[];
+    };
+}
+
+interface GlobalMarketResponse {
+    data: {
+        active_cryptocurrencies: number;
+        markets: number;
+        total_market_cap: Record<string, number>;
+        total_volume: Record<string, number>;
+        market_cap_percentage: Record<string, number>;
+        market_cap_change_percentage_24h_usd: number;
+        updated_at: number;
+    };
+}
+
+interface FearGreedEntry {
+    value: string;
+    value_classification: string;
+    timestamp: string;
+    time_until_update?: string;
+}
+
+interface PortfolioHolding {
+    id: string;
+    coinId: string;
+    symbol: string;
+    name: string;
+    image: string;
+    amount: number;
+    avgBuyPrice: number;
+    notes?: string;
+    addedAt: string;
+}
+
+interface PriceAlert {
+    id: string;
+    coinId: string;
+    symbol: string;
+    name: string;
+    image: string;
+    targetPrice: number;
+    condition: 'above' | 'below';
+    createdAt: string;
+    triggered?: boolean;
 }
 
 interface TrendingCoin {
@@ -96,7 +144,6 @@ interface SearchCoin {
     };
 }
 
-// Chart Section Props (used in ChartSection.tsx)
 interface ChartSectionProps {
     coinData: {
         image: { large: string };
@@ -194,10 +241,34 @@ interface CoinDetailsData {
             usd: number;
             [key: string]: number;
         };
+        high_24h?: {
+            usd: number;
+        };
+        low_24h?: {
+            usd: number;
+        };
+        ath?: {
+            usd: number;
+        };
+        ath_change_percentage?: {
+            usd: number;
+        };
+        atl?: {
+            usd: number;
+        };
+        circulating_supply?: number;
+        total_supply?: number;
+        max_supply?: number | null;
+        fully_diluted_valuation?: {
+            usd: number;
+        };
         price_change_24h_in_currency: {
             usd: number;
         };
         price_change_percentage_24h_in_currency: {
+            usd: number;
+        };
+        price_change_percentage_7d_in_currency?: {
             usd: number;
         };
         price_change_percentage_30d_in_currency: {
@@ -231,12 +302,17 @@ interface LiveDataProps {
 }
 
 interface LiveCoinHeaderProps {
+    coinId?: string;
+    symbol?: string;
     name: string;
     image: string;
     livePrice?: number;
     livePriceChangePercentage24h: number;
     priceChangePercentage30d: number;
     priceChange24h: number;
+    high24h?: number;
+    low24h?: number;
+    marketCapRank?: number;
 }
 
 interface Category {
@@ -251,6 +327,7 @@ interface UseCoinGeckoWebSocketProps {
     coinId: string;
     poolId: string;
     liveInterval?: '1s' | '1m';
+    fallbackBasePrice?: number;
 }
 
 interface UseCoinGeckoWebSocketReturn {
