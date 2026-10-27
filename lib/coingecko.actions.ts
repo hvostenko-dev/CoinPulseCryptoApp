@@ -14,14 +14,16 @@ type CoinGeckoQueryValue =
 
 type CoinGeckoQueryParams = Record<string, CoinGeckoQueryValue>;
 
-interface CoinGeckoApiError {
-    error?: string;
+interface CoinGeckoStatusPayload {
     error_code?: number;
     error_message?: string;
-    status?: {
-        error_code?: number;
-        error_message?: string;
-    };
+}
+
+interface CoinGeckoApiError {
+    error?: string | { status?: CoinGeckoStatusPayload };
+    error_code?: number;
+    error_message?: string;
+    status?: CoinGeckoStatusPayload;
 }
 
 const rawBaseUrl =
@@ -40,10 +42,16 @@ export async function fetcher<T>(
         ? endpoint
         : `/${endpoint}`;
 
+    // CoinGecko Demo API restricts /ohlc days='max' (401 Unauthorized); clamp to 365
+    const safeParams: CoinGeckoQueryParams = { ...params };
+    if (normalizedEndpoint.endsWith('/ohlc') && safeParams.days === 'max') {
+        safeParams.days = 365;
+    }
+
     const url = qs.stringifyUrl(
         {
             url: `${BASE_URL}${normalizedEndpoint}`,
-            query: params,
+            query: safeParams,
         },
         {
             skipEmptyString: true,
@@ -86,15 +94,23 @@ export async function fetcher<T>(
                 ? (responseBody as CoinGeckoApiError)
                 : null;
 
+        const nestedErrorObj =
+            typeof errorBody?.error === 'object' && errorBody.error !== null
+                ? errorBody.error.status
+                : null;
+
         const errorMessage =
             errorBody?.status?.error_message ??
+            nestedErrorObj?.error_message ??
             errorBody?.error_message ??
-            errorBody?.error ??
+            (typeof errorBody?.error === 'string' ? errorBody.error : null) ??
             responseText ??
             response.statusText;
 
         const errorCode =
-            errorBody?.status?.error_code ?? errorBody?.error_code;
+            errorBody?.status?.error_code ??
+            nestedErrorObj?.error_code ??
+            errorBody?.error_code;
 
         console.error('CoinGecko API request failed:', {
             url,

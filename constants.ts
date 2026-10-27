@@ -115,6 +115,10 @@ export const getChartConfig = (
     },
 });
 
+/**
+ * CoinGecko Demo API supports up to 365 days on /ohlc (days='max' requires Pro API and returns 401).
+ * Mapping 'max' -> 365 ensures all timeframe buttons work smoothly on Demo API.
+ */
 export const PERIOD_CONFIG: Record<
     Period,
     { days: number | string; interval?: 'hourly' | 'daily' }
@@ -125,7 +129,7 @@ export const PERIOD_CONFIG: Record<
     '3months': { days: 90, interval: 'daily' },
     '6months': { days: 180, interval: 'daily' },
     yearly: { days: 365 },
-    max: { days: 'max' },
+    max: { days: 365 },
 };
 
 export const PERIOD_BUTTONS: { value: Period; label: string }[] = [
@@ -135,7 +139,6 @@ export const PERIOD_BUTTONS: { value: Period; label: string }[] = [
     { value: '3months', label: '3M' },
     { value: '6months', label: '6M' },
     { value: 'yearly', label: '1Y' },
-    { value: 'max', label: 'Max' },
 ];
 
 export const LIVE_INTERVAL_BUTTONS: { value: '1s' | '1m'; label: string }[] = [
