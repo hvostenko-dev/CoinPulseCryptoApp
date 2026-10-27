@@ -4,7 +4,6 @@ import React, { useMemo, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import {
-    Activity,
     ArrowUpRight,
     Flame,
     Gauge,
@@ -102,10 +101,10 @@ const MarketRadarClient = ({
                         <span
                             className={`rounded-full px-2.5 py-1 font-mono text-xs font-bold ${
                                 fngScore >= 55
-                                    ? 'bg-emerald-500/15 text-emerald-300 border border-emerald-500/30'
+                                    ? 'border border-emerald-500/30 bg-emerald-500/15 text-emerald-300'
                                     : fngScore <= 44
-                                      ? 'bg-rose-500/15 text-rose-300 border border-rose-500/30'
-                                      : 'bg-amber-500/15 text-amber-300 border border-amber-500/30'
+                                      ? 'border border-rose-500/30 bg-rose-500/15 text-rose-300'
+                                      : 'border border-amber-500/30 bg-amber-500/15 text-amber-300'
                             }`}
                         >
                             {currentFng.value_classification}
@@ -128,7 +127,7 @@ const MarketRadarClient = ({
                         </div>
 
                         {/* 7-Day Mini Bars */}
-                        <div className="flex items-end gap-1.5 h-14">
+                        <div className="flex h-14 items-end gap-1.5">
                             {fearGreedList
                                 .slice(0, 7)
                                 .reverse()
@@ -196,7 +195,9 @@ const MarketRadarClient = ({
                             </div>
                         </div>
                         <span className="font-mono text-xs font-semibold text-cyan-400">
-                            {(globalData.markets || 1195).toLocaleString()}{' '}
+                            {(
+                                globalData.markets || 1195
+                            ).toLocaleString('en-US')}{' '}
                             Exchanges
                         </span>
                     </div>
@@ -436,7 +437,7 @@ const MarketRadarClient = ({
                                     change,
                                 )} ${
                                     isLargeTile
-                                        ? 'sm:col-span-2 sm:row-span-2 min-h-[132px]'
+                                        ? 'min-h-[132px] sm:col-span-2 sm:row-span-2'
                                         : 'min-h-[96px]'
                                 }`}
                             >
@@ -451,7 +452,7 @@ const MarketRadarClient = ({
                                         />
                                         <div>
                                             <span
-                                                className={`font-mono font-extrabold uppercase tracking-tight ${
+                                                className={`font-mono font-extrabold tracking-tight uppercase ${
                                                     isLargeTile
                                                         ? 'text-base sm:text-lg'
                                                         : 'text-xs sm:text-sm'

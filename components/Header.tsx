@@ -96,10 +96,10 @@ const Header = () => {
                             <Image
                                 src="/logo.svg"
                                 alt="NexusFi logo"
-                                width={156}
-                                height={36}
+                                width={168}
+                                height={38}
                                 priority
-                                className="h-9 w-auto"
+                                style={{ height: '36px', width: 'auto' }}
                             />
                         </Link>
 
@@ -161,7 +161,7 @@ const Header = () => {
                             className="flex h-10 items-center gap-3 rounded-xl border border-white/10 bg-white/[0.04] px-3.5 text-sm text-slate-300 transition hover:border-emerald-500/40 hover:bg-white/[0.07] hover:text-white"
                         >
                             <Search size={16} className="text-emerald-400" />
-                            <span className="hidden sm:inline text-slate-400">
+                            <span className="hidden text-slate-400 sm:inline">
                                 Search assets, tickers...
                             </span>
                             <kbd className="hidden rounded-md border border-white/15 bg-black/40 px-1.5 py-0.5 font-mono text-[11px] text-slate-400 md:inline-block">

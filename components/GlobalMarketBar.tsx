@@ -112,7 +112,7 @@ const GlobalMarketBar = ({
                         <span className="font-mono font-semibold text-white">
                             {(
                                 globalData.active_cryptocurrencies || 16840
-                            ).toLocaleString()}
+                            ).toLocaleString('en-US')}
                         </span>
                     </div>
                     <div className="flex items-center gap-1 text-emerald-400/90">

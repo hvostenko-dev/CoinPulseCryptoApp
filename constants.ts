@@ -108,7 +108,7 @@ export const getChartConfig = (
     localization: {
         priceFormatter: (price: number) =>
             '$' +
-            price.toLocaleString(undefined, {
+            price.toLocaleString('en-US', {
                 minimumFractionDigits: price < 1 ? 4 : 2,
                 maximumFractionDigits: price < 1 ? 6 : 2,
             }),
