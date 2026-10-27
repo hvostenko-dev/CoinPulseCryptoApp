@@ -48,7 +48,7 @@ const Page = async ({ params }: NextPageProps) => {
             vs_currency: 'usd',
             days: 1,
             precision: 'full',
-        }),
+        }).catch(() => []),
     ]);
 
     const platform = coinData.asset_platform_id
@@ -68,35 +68,38 @@ const Page = async ({ params }: NextPageProps) => {
 
     const poolId = pool?.id ?? '';
 
-    const circulating = coinData.market_data.circulating_supply ?? 0;
+    const circulating = coinData.market_data?.circulating_supply ?? 0;
     const maxSupply =
-        coinData.market_data.max_supply ??
-        coinData.market_data.total_supply ??
+        coinData.market_data?.max_supply ??
+        coinData.market_data?.total_supply ??
         0;
     const supplyPct =
         maxSupply > 0 ? Math.min(100, (circulating / maxSupply) * 100) : null;
 
+    const mcapUsd = coinData.market_data?.market_cap?.usd ?? 0;
+    const fdvUsd =
+        coinData.market_data?.fully_diluted_valuation?.usd ?? mcapUsd;
+    const volUsd = coinData.market_data?.total_volume?.usd ?? 0;
+    const athUsd = coinData.market_data?.ath?.usd;
+
     const coinDetails = [
         {
             label: 'Market Cap',
-            value: formatCompactNumber(coinData.market_data.market_cap.usd),
+            value: formatCompactNumber(mcapUsd),
         },
         {
             label: 'Fully Diluted (FDV)',
-            value: formatCompactNumber(
-                coinData.market_data.fully_diluted_valuation?.usd ??
-                    coinData.market_data.market_cap.usd,
-            ),
+            value: formatCompactNumber(fdvUsd),
         },
         {
             label: '24h Trading Volume',
-            value: formatCompactNumber(coinData.market_data.total_volume.usd),
+            value: formatCompactNumber(volUsd),
         },
         {
             label: 'All-Time High (ATH)',
-            value: coinData.market_data.ath?.usd
-                ? `${formatCurrency(coinData.market_data.ath.usd)} (${formatPercentage(
-                      coinData.market_data.ath_change_percentage?.usd ?? 0,
+            value: athUsd
+                ? `${formatCurrency(athUsd)} (${formatPercentage(
+                      coinData.market_data?.ath_change_percentage?.usd ?? 0,
                   )})`
                 : 'N/A',
         },
@@ -108,8 +111,8 @@ const Page = async ({ params }: NextPageProps) => {
             label: 'Official Website',
             value: '-',
             link:
-                coinData.links.homepage.find(
-                    (homepage) => homepage.length > 0,
+                coinData.links?.homepage?.find(
+                    (homepage) => homepage && homepage.length > 0,
                 ) ?? '',
             linkText: 'Visit Website',
         },
@@ -117,15 +120,16 @@ const Page = async ({ params }: NextPageProps) => {
             label: 'Block Explorer',
             value: '-',
             link:
-                coinData.links.blockchain_site.find(
-                    (blockchainSite) => blockchainSite.length > 0,
+                coinData.links?.blockchain_site?.find(
+                    (blockchainSite) =>
+                        blockchainSite && blockchainSite.length > 0,
                 ) ?? '',
             linkText: 'On-Chain Explorer',
         },
         {
             label: 'Community Hub',
             value: '-',
-            link: coinData.links.subreddit_url ?? '',
+            link: coinData.links?.subreddit_url ?? '',
             linkText: 'Reddit / Forum',
         },
     ];
@@ -145,13 +149,15 @@ const Page = async ({ params }: NextPageProps) => {
                     href="/lab"
                     className="inline-flex items-center gap-1.5 font-mono text-xs font-semibold text-cyan-400 hover:underline"
                 >
-                    <span>Compare {coinData.symbol.toUpperCase()} in Lab →</span>
+                    <span>
+                        Compare {coinData.symbol.toUpperCase()} in Lab →
+                    </span>
                 </Link>
             </div>
 
             <main
                 id="coin-details-page"
-                className="p-0! grid grid-cols-1 items-start gap-6 xl:grid-cols-3"
+                className="grid grid-cols-1 items-start gap-6 p-0! xl:grid-cols-3"
             >
                 <section className="primary xl:col-span-2">
                     <LiveDataWrapper
@@ -165,8 +171,14 @@ const Page = async ({ params }: NextPageProps) => {
                 <section className="secondary space-y-6 lg:col-span-1">
                     <Converter
                         symbol={coinData.symbol}
-                        icon={coinData.image.small}
-                        priceList={coinData.market_data.current_price}
+                        icon={
+                            coinData.image?.small ||
+                            coinData.image?.large ||
+                            ''
+                        }
+                        priceList={
+                            coinData.market_data?.current_price ?? { usd: 0 }
+                        }
                     />
 
                     {/* Supply Progress Card */}

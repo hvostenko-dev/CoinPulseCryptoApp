@@ -15,11 +15,13 @@ const LiveDataWrapper = ({
     coinOHLCData,
 }: LiveDataProps) => {
     const [liveInterval, setLiveInterval] = useState<'1s' | '1m'>('1s');
+    const baseUsdPrice = coin.market_data?.current_price?.usd ?? 0;
+
     const { trades, ohlcv, price } = useCoinGeckoWebSocket({
         coinId,
         poolId,
         liveInterval,
-        fallbackBasePrice: coin.market_data.current_price.usd,
+        fallbackBasePrice: baseUsdPrice,
     });
 
     const tradeColumns: DataTableColumn<Trade>[] = [
@@ -67,20 +69,23 @@ const LiveDataWrapper = ({
                 coinId={coin.id}
                 symbol={coin.symbol}
                 name={coin.name}
-                image={coin.image.large}
-                livePrice={price?.usd ?? coin.market_data.current_price.usd}
+                image={coin.image?.large || coin.image?.small || ''}
+                livePrice={price?.usd ?? baseUsdPrice}
                 livePriceChangePercentage24h={
                     price?.change24h ??
-                    coin.market_data.price_change_percentage_24h_in_currency.usd
+                    coin.market_data?.price_change_percentage_24h_in_currency
+                        ?.usd ??
+                    0
                 }
                 priceChangePercentage30d={
-                    coin.market_data.price_change_percentage_30d_in_currency.usd
+                    coin.market_data?.price_change_percentage_30d_in_currency
+                        ?.usd ?? 0
                 }
                 priceChange24h={
-                    coin.market_data.price_change_24h_in_currency.usd
+                    coin.market_data?.price_change_24h_in_currency?.usd ?? 0
                 }
-                high24h={coin.market_data.high_24h?.usd}
-                low24h={coin.market_data.low_24h?.usd}
+                high24h={coin.market_data?.high_24h?.usd}
+                low24h={coin.market_data?.low_24h?.usd}
                 marketCapRank={coin.market_cap_rank}
             />
 

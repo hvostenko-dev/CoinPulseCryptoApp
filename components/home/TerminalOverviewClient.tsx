@@ -59,9 +59,10 @@ const TerminalOverviewClient = ({
         });
     };
 
-    const currentPrice = activeCoin.market_data.current_price.usd;
+    const currentPrice = activeCoin.market_data?.current_price?.usd ?? 0;
     const change24h =
-        activeCoin.market_data.price_change_percentage_24h_in_currency.usd ?? 0;
+        activeCoin.market_data?.price_change_percentage_24h_in_currency?.usd ??
+        0;
     const isUp = change24h >= 0;
     const starred = isWatched(activeCoin.id);
 
@@ -126,7 +127,7 @@ const TerminalOverviewClient = ({
                                 id: activeCoin.id,
                                 symbol: activeCoin.symbol,
                                 name: activeCoin.name,
-                                image: activeCoin.image.large,
+                                image: activeCoin.image?.large || '',
                                 currentPrice,
                             })
                         }
@@ -143,7 +144,7 @@ const TerminalOverviewClient = ({
                                 id: activeCoin.id,
                                 symbol: activeCoin.symbol,
                                 name: activeCoin.name,
-                                image: activeCoin.image.large,
+                                image: activeCoin.image?.large || '',
                                 currentPrice,
                             })
                         }
@@ -173,7 +174,7 @@ const TerminalOverviewClient = ({
                 <div className="flex flex-wrap items-center gap-4">
                     <div className="flex items-center gap-3">
                         <Image
-                            src={activeCoin.image.large}
+                            src={activeCoin.image?.large || ''}
                             alt={`${activeCoin.name} logo`}
                             width={48}
                             height={48}
@@ -223,7 +224,8 @@ const TerminalOverviewClient = ({
                             <p className="text-slate-400">Market Cap</p>
                             <p className="mt-0.5 font-mono font-semibold text-white">
                                 {formatCompactNumber(
-                                    activeCoin.market_data.market_cap.usd,
+                                    activeCoin.market_data?.market_cap?.usd ??
+                                        0,
                                 )}
                             </p>
                         </div>
@@ -231,7 +233,8 @@ const TerminalOverviewClient = ({
                             <p className="text-slate-400">24h Volume</p>
                             <p className="mt-0.5 font-mono font-semibold text-white">
                                 {formatCompactNumber(
-                                    activeCoin.market_data.total_volume.usd,
+                                    activeCoin.market_data?.total_volume?.usd ??
+                                        0,
                                 )}
                             </p>
                         </div>
