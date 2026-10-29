@@ -84,9 +84,9 @@ const MarketRadarClient = ({
             <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
                 {/* Card 1: Fear & Greed Sentiment Index */}
                 <div className="flex flex-col justify-between rounded-2xl border border-white/[0.08] bg-[#0a101d]/90 p-5 shadow-lg">
-                    <div className="flex items-center justify-between">
+                    <div className="flex items-center justify-between gap-2">
                         <div className="flex items-center gap-2">
-                            <span className="flex size-8 items-center justify-center rounded-lg bg-emerald-500/15 text-emerald-400">
+                            <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-emerald-500/15 text-emerald-400">
                                 <Gauge size={17} />
                             </span>
                             <div>
@@ -99,7 +99,7 @@ const MarketRadarClient = ({
                             </div>
                         </div>
                         <span
-                            className={`rounded-full px-2.5 py-1 font-mono text-xs font-bold ${
+                            className={`shrink-0 rounded-full px-2.5 py-1 font-mono text-xs font-bold ${
                                 fngScore >= 55
                                     ? 'border border-emerald-500/30 bg-emerald-500/15 text-emerald-300'
                                     : fngScore <= 44
@@ -180,9 +180,9 @@ const MarketRadarClient = ({
 
                 {/* Card 2: Capital Dominance & Liquidity */}
                 <div className="flex flex-col justify-between rounded-2xl border border-white/[0.08] bg-[#0a101d]/90 p-5 shadow-lg">
-                    <div className="flex items-center justify-between">
+                    <div className="flex items-center justify-between gap-2">
                         <div className="flex items-center gap-2">
-                            <span className="flex size-8 items-center justify-center rounded-lg bg-cyan-500/15 text-cyan-400">
+                            <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-cyan-500/15 text-cyan-400">
                                 <Layers size={17} />
                             </span>
                             <div>
@@ -194,7 +194,7 @@ const MarketRadarClient = ({
                                 </p>
                             </div>
                         </div>
-                        <span className="font-mono text-xs font-semibold text-cyan-400">
+                        <span className="shrink-0 font-mono text-xs font-semibold text-cyan-400">
                             {(
                                 globalData.markets || 1195
                             ).toLocaleString('en-US')}{' '}
@@ -202,28 +202,28 @@ const MarketRadarClient = ({
                         </span>
                     </div>
 
-                    <div className="my-4 grid grid-cols-3 gap-2.5">
-                        <div className="rounded-xl border border-amber-500/20 bg-amber-500/[0.06] p-3">
-                            <p className="text-[11px] font-semibold text-amber-300">
+                    <div className="my-4 grid grid-cols-3 gap-2">
+                        <div className="rounded-xl border border-amber-500/20 bg-amber-500/[0.06] p-2.5 sm:p-3">
+                            <p className="truncate text-[10px] font-semibold text-amber-300 sm:text-[11px]">
                                 Bitcoin (BTC)
                             </p>
-                            <p className="mt-1 font-mono text-xl font-bold text-white">
+                            <p className="mt-1 font-mono text-base font-bold text-white sm:text-xl">
                                 {btcDom.toFixed(1)}%
                             </p>
                         </div>
-                        <div className="rounded-xl border border-cyan-500/20 bg-cyan-500/[0.06] p-3">
-                            <p className="text-[11px] font-semibold text-cyan-300">
+                        <div className="rounded-xl border border-cyan-500/20 bg-cyan-500/[0.06] p-2.5 sm:p-3">
+                            <p className="truncate text-[10px] font-semibold text-cyan-300 sm:text-[11px]">
                                 Ethereum (ETH)
                             </p>
-                            <p className="mt-1 font-mono text-xl font-bold text-white">
+                            <p className="mt-1 font-mono text-base font-bold text-white sm:text-xl">
                                 {ethDom.toFixed(1)}%
                             </p>
                         </div>
-                        <div className="rounded-xl border border-emerald-500/20 bg-emerald-500/[0.06] p-3">
-                            <p className="text-[11px] font-semibold text-emerald-300">
+                        <div className="rounded-xl border border-emerald-500/20 bg-emerald-500/[0.06] p-2.5 sm:p-3">
+                            <p className="truncate text-[10px] font-semibold text-emerald-300 sm:text-[11px]">
                                 Others / Alts
                             </p>
-                            <p className="mt-1 font-mono text-xl font-bold text-white">
+                            <p className="mt-1 font-mono text-base font-bold text-white sm:text-xl">
                                 {altDom.toFixed(1)}%
                             </p>
                         </div>
@@ -264,9 +264,9 @@ const MarketRadarClient = ({
 
                 {/* Card 3: 24h Top Gainers & Losers Radar */}
                 <div className="flex flex-col justify-between rounded-2xl border border-white/[0.08] bg-[#0a101d]/90 p-5 shadow-lg md:col-span-2 xl:col-span-1">
-                    <div className="flex items-center justify-between">
+                    <div className="flex items-center justify-between gap-2">
                         <div className="flex items-center gap-2">
-                            <span className="flex size-8 items-center justify-center rounded-lg bg-emerald-500/15 text-emerald-400">
+                            <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-emerald-500/15 text-emerald-400">
                                 <Flame size={17} />
                             </span>
                             <div>
@@ -279,7 +279,7 @@ const MarketRadarClient = ({
                             </div>
                         </div>
 
-                        <div className="flex rounded-xl border border-white/10 bg-black/30 p-0.5 text-xs">
+                        <div className="flex shrink-0 rounded-xl border border-white/10 bg-black/30 p-0.5 text-xs">
                             <button
                                 type="button"
                                 onClick={() => setMoverTab('gainers')}
@@ -365,7 +365,7 @@ const MarketRadarClient = ({
             <div className="rounded-2xl border border-white/[0.08] bg-[#0a101d]/90 p-5 shadow-xl">
                 <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
                     <div className="flex items-center gap-2.5">
-                        <span className="flex size-9 items-center justify-center rounded-xl bg-emerald-500/15 text-emerald-400">
+                        <span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-emerald-500/15 text-emerald-400">
                             <Grid size={18} />
                         </span>
                         <div>

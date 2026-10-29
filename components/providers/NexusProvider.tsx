@@ -452,7 +452,7 @@ export const NexusProvider = ({ children }: { children: React.ReactNode }) => {
                     onClick={() => setAlertModalCoin(null)}
                 >
                     <div
-                        className="w-full max-w-md rounded-2xl border border-emerald-500/25 bg-[#0a101d] p-6 shadow-2xl"
+                        className="w-full max-w-md rounded-2xl border border-emerald-500/25 bg-[#0a101d] p-5 shadow-2xl sm:p-6"
                         onClick={(e) => e.stopPropagation()}
                     >
                         <div className="flex items-center justify-between border-b border-white/10 pb-4">
@@ -502,7 +502,7 @@ export const NexusProvider = ({ children }: { children: React.ReactNode }) => {
                                         onClick={() =>
                                             setAlertCondition('above')
                                         }
-                                        className={`rounded-xl border py-2.5 text-sm font-semibold transition ${
+                                        className={`rounded-xl border py-2.5 text-xs font-semibold transition sm:text-sm ${
                                             alertCondition === 'above'
                                                 ? 'border-emerald-500 bg-emerald-500/15 text-emerald-300'
                                                 : 'border-white/10 bg-white/5 text-slate-400 hover:text-white'
@@ -515,7 +515,7 @@ export const NexusProvider = ({ children }: { children: React.ReactNode }) => {
                                         onClick={() =>
                                             setAlertCondition('below')
                                         }
-                                        className={`rounded-xl border py-2.5 text-sm font-semibold transition ${
+                                        className={`rounded-xl border py-2.5 text-xs font-semibold transition sm:text-sm ${
                                             alertCondition === 'below'
                                                 ? 'border-rose-500 bg-rose-500/15 text-rose-300'
                                                 : 'border-white/10 bg-white/5 text-slate-400 hover:text-white'
@@ -540,7 +540,7 @@ export const NexusProvider = ({ children }: { children: React.ReactNode }) => {
                                     }
                                     className="w-full rounded-xl border border-white/15 bg-black/40 px-4 py-3 font-mono text-base text-white outline-none focus:border-emerald-500"
                                 />
-                                <div className="mt-2 flex gap-2">
+                                <div className="mt-2 flex flex-wrap gap-1.5 sm:gap-2">
                                     {[
                                         { label: '-10%', mult: 0.9 },
                                         { label: '-5%', mult: 0.95 },
@@ -596,7 +596,7 @@ export const NexusProvider = ({ children }: { children: React.ReactNode }) => {
                     onClick={() => setPortfolioModalCoin(null)}
                 >
                     <div
-                        className="w-full max-w-md rounded-2xl border border-cyan-500/25 bg-[#0a101d] p-6 shadow-2xl"
+                        className="w-full max-w-md rounded-2xl border border-cyan-500/25 bg-[#0a101d] p-5 shadow-2xl sm:p-6"
                         onClick={(e) => e.stopPropagation()}
                     >
                         <div className="flex items-center justify-between border-b border-white/10 pb-4">
@@ -636,7 +636,7 @@ export const NexusProvider = ({ children }: { children: React.ReactNode }) => {
                             onSubmit={handlePortfolioSubmit}
                             className="mt-5 space-y-4"
                         >
-                            <div className="grid grid-cols-2 gap-3">
+                            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                                 <div>
                                     <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-slate-400">
                                         Quantity ({portfolioModalCoin.symbol.toUpperCase()})
@@ -707,11 +707,11 @@ export const NexusProvider = ({ children }: { children: React.ReactNode }) => {
             )}
 
             {/* Floating Institutional Toast Notifications */}
-            <div className="pointer-events-none fixed bottom-20 right-4 z-[99999] flex flex-col gap-2.5 sm:bottom-6 sm:right-6">
+            <div className="pointer-events-none fixed right-3 bottom-20 left-3 z-[99999] flex flex-col items-end gap-2.5 sm:right-6 sm:bottom-6 sm:left-auto">
                 {toasts.map((toast) => (
                     <div
                         key={toast.id}
-                        className="pointer-events-auto flex w-80 items-start gap-3 rounded-2xl border border-emerald-500/30 bg-[#0b1322]/95 p-4 shadow-2xl backdrop-blur-xl transition-all sm:w-96"
+                        className="pointer-events-auto flex w-full max-w-sm items-start gap-3 rounded-2xl border border-emerald-500/30 bg-[#0b1322]/95 p-4 shadow-2xl backdrop-blur-xl transition-all sm:w-96"
                     >
                         <div className="mt-0.5 rounded-lg bg-emerald-500/15 p-2 text-emerald-400">
                             {toast.type === 'alert' ? (

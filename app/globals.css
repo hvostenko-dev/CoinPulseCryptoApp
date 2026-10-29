@@ -124,29 +124,27 @@
     --sidebar-border: oklch(1 0 0 / 10%);
     --sidebar-ring: oklch(0.556 0 0);
 
-    /* Brand colors */
-    --dark-900: #000510;
-    --dark-700: #0f1316;
-    --dark-500: #1a2027;
-    --dark-400: #1e2833;
-
-    --purple-600: #1b254b;
-    --purple-100: #a3aed0;
-
-    --green-500: #76da44;
-    --green-400: #2ebe7b;
-    --green-300: #99e39e;
-
-    --red-500: #ff685f;
-    --yellow-500: #dabe44;
+    /* NexusFi Pro Institutional Brand Palette */
+    --dark-900: #04070e;
+    --dark-700: #050811;
+    --dark-500: #0a101d;
+    --dark-400: #111a2e;
+    --purple-600: #16233b;
+    --purple-100: #94a3b8;
+    --green-500: #10b981;
+    --green-400: #34d399;
+    --green-300: #6ee7b7;
+    --red-500: #f43f5e;
+    --yellow-500: #f59e0b;
 }
 
 @layer base {
     * {
         @apply border-border outline-ring/50;
     }
+    html,
     body {
-        @apply bg-dark-700 text-foreground;
+        @apply bg-dark-700 text-foreground overflow-x-hidden;
     }
 }
 
@@ -156,58 +154,30 @@
     }
 
     .main-container {
-        @apply py-6 md:py-12 mx-auto px-4 sm:px-6 max-w-360 w-full space-y-6 md:space-y-6;
+        @apply py-5 sm:py-8 md:py-10 mx-auto px-3.5 sm:px-6 max-w-360 w-full space-y-6;
     }
 
     .badge {
-        @apply font-medium mt-2 h-fit py-1 flex items-center gap-1;
+        @apply font-medium h-fit py-1 px-2.5 flex items-center gap-1 rounded-lg;
     }
 
     .badge-up {
-        @apply bg-green-600/20! text-green-600!;
+        @apply bg-emerald-500/15! text-emerald-400! border border-emerald-500/25!;
     }
 
     .badge-down {
-        @apply bg-red-500/20! text-red-500!;
+        @apply bg-rose-500/15! text-rose-400! border border-rose-500/25!;
     }
 
     .skeleton {
-        @apply bg-dark-400/60;
-    }
-
-    header {
-        @apply border-b border-dark-400 h-20;
-
-        .inner {
-            @apply flex justify-between items-center h-full;
-
-            a {
-                @apply mb-0;
-            }
-
-            nav {
-                @apply flex h-full items-center;
-
-                .nav-link {
-                    @apply px-6 py-5 flex items-center transition-all hover:text-white font-medium h-full text-purple-100 cursor-pointer;
-                }
-
-                .nav-link.is-active {
-                    @apply text-white;
-                }
-
-                .nav-link.is-home {
-                    @apply max-sm:hidden;
-                }
-            }
-        }
+        @apply bg-white/[0.06] animate-pulse rounded-lg;
     }
 
     #candlestick-chart {
-        @apply p-3 mt-5 rounded-lg bg-dark-500;
+        @apply w-full rounded-xl bg-transparent;
 
         .chart-header {
-            @apply flex flex-col gap-3 xl:flex-row xl:items-center mb-4 font-semibold text-[#e6eef8] text-[20px];
+            @apply flex flex-col gap-3.5 xl:flex-row xl:items-center xl:justify-between mb-4 font-semibold text-[#e6eef8];
         }
 
         .button-group {
@@ -227,71 +197,15 @@
         }
     }
 
-    #coin-card {
-        @apply bg-dark-500 hover:bg-dark-400/50 transition-all rounded-lg p-5 border border-purple-600/20 hover:border-purple-600/50 cursor-pointer h-fit;
-
-        .header {
-            @apply flex gap-3 mb-4;
-
-            img {
-                @apply size-12 rounded-full;
-            }
-
-            h3 {
-                @apply font-semibold text-lg;
-            }
-
-            p {
-                @apply text-sm text-gray-400 uppercase;
-            }
-        }
-
-        .price-row {
-            @apply flex justify-between items-center mb-5;
-
-            .price {
-                @apply text-xl font-bold;
-            }
-
-            .change {
-                @apply flex items-center gap-2;
-            }
-        }
-
-        .stats {
-            @apply space-y-3;
-
-            .stat-row {
-                @apply flex gap-1 justify-between;
-
-                .label {
-                    @apply text-purple-100;
-                }
-
-                .value {
-                    @apply font-medium;
-                }
-            }
-        }
-    }
-
     #categories {
-        @apply pt-8 mt-5 w-full bg-dark-500 rounded-xl overflow-hidden;
-
-        h4 {
-            @apply text-xl md:text-2xl font-semibold mb-2 pl-5;
-        }
+        @apply w-full bg-[#0a101d]/90 rounded-2xl overflow-hidden;
 
         .category-cell {
-            @apply pl-5 font-bold;
+            @apply pl-4 sm:pl-5 font-bold text-white;
         }
 
         .top-gainers-cell {
-            @apply flex gap-1 mr-5;
-
-            img {
-                @apply rounded-full py-2;
-            }
+            @apply pr-3 sm:pr-5;
         }
 
         .change-header-cell {
@@ -307,42 +221,26 @@
         }
 
         .volume-cell {
-            @apply font-medium;
+            @apply font-medium pr-4 sm:pr-5;
         }
     }
 
     #trending-coins {
-        @apply w-full flex flex-col justify-center h-full py-4 bg-dark-500 rounded-xl;
-
-        h4 {
-            @apply text-xl md:text-2xl font-semibold mb-2 px-5;
-        }
+        @apply w-full flex flex-col justify-between h-full bg-[#0a101d]/90 rounded-2xl;
 
         .trending-coins-table {
-            @apply bg-dark-500 overflow-hidden;
+            @apply bg-transparent overflow-hidden;
 
             .name-cell {
-                @apply font-bold;
-
-                a {
-                    @apply pl-1 md:pl-2 py-1 md:py-2 xl:py-1 flex items-center gap-2 md:gap-3;
-
-                    img {
-                        @apply rounded-full size-8 md:size-9;
-                    }
-
-                    p {
-                        @apply text-sm md:text-base;
-                    }
-                }
+                @apply font-bold pl-3 sm:pl-4! py-2.5!;
             }
 
             .change-cell {
-                @apply font-medium py-4 pr-3 md:pr-5;
+                @apply font-medium py-2.5! px-2!;
             }
 
             .price-cell {
-                @apply font-bold pr-5 text-sm max-w-full truncate;
+                @apply font-bold pr-3 sm:pr-4! text-xs sm:text-sm max-w-full truncate;
             }
 
             .price-change {
@@ -352,14 +250,14 @@
     }
 
     .home-grid {
-        @apply grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 items-start lg:items-center gap-6;
+        @apply grid grid-cols-1 xl:grid-cols-3 items-stretch gap-6;
     }
 
     #categories-fallback {
-        @apply pt-8 mt-5 w-full bg-dark-500 rounded-xl overflow-hidden;
+        @apply pt-6 w-full bg-[#0a101d]/90 border border-white/[0.08] rounded-2xl overflow-hidden;
 
         h4 {
-            @apply text-xl md:text-2xl font-semibold mb-2 pl-5;
+            @apply text-lg md:text-xl font-bold mb-3 pl-5 text-white;
         }
 
         .category-cell {
@@ -386,14 +284,17 @@
             @apply font-medium;
         }
 
+        .category-line,
         .category-skeleton {
-            @apply h-4 w-32;
+            @apply h-4 w-28 sm:w-36;
         }
 
+        .gainer-image,
         .coin-skeleton {
             @apply h-7 w-7 rounded-full;
         }
 
+        .change-line,
         .value-skeleton-sm {
             @apply h-4 w-16;
         }
@@ -412,14 +313,14 @@
     }
 
     #coin-overview-fallback {
-        @apply w-full h-full xl:col-span-2 px-2 bg-dark-500 rounded-xl;
+        @apply w-full h-full xl:col-span-2 p-5 bg-[#0a101d]/90 border border-white/[0.08] rounded-2xl;
 
         .header {
-            @apply flex-1 mb-2 flex gap-2 md:gap-3;
+            @apply flex-1 mb-4 flex gap-3 items-center;
         }
 
         .header-image {
-            @apply w-10 h-10 md:w-14 md:h-14 rounded-full;
+            @apply w-11 h-11 md:w-12 md:h-12 rounded-full;
         }
 
         .info {
@@ -439,7 +340,7 @@
         }
 
         .chart {
-            @apply h-90;
+            @apply h-85;
         }
 
         .chart-skeleton {
@@ -448,21 +349,21 @@
     }
 
     #trending-coins-fallback {
-        @apply w-full flex flex-col justify-center h-full py-4 bg-dark-500 rounded-xl;
+        @apply w-full flex flex-col justify-between h-full p-5 bg-[#0a101d]/90 border border-white/[0.08] rounded-2xl;
 
         h4 {
-            @apply text-xl md:text-2xl font-semibold mb-2 px-5;
+            @apply text-lg font-bold mb-3 px-2 text-white;
         }
 
         .trending-coins-table {
-            @apply bg-dark-500 overflow-hidden;
+            @apply bg-transparent overflow-hidden;
 
             .name-cell {
                 @apply font-bold;
             }
 
             .name-link {
-                @apply pl-1 md:pl-2 py-1 md:py-2 xl:py-1 flex items-center gap-2 md:gap-3;
+                @apply pl-1 md:pl-2 py-1.5 flex items-center gap-2.5;
             }
 
             .name-image {
@@ -474,11 +375,11 @@
             }
 
             .change-cell {
-                @apply font-medium py-4 pr-3 md:pr-5;
+                @apply font-medium py-3 pr-3;
             }
 
             .price-cell {
-                @apply font-bold pr-5 text-sm max-w-full truncate;
+                @apply font-bold pr-4 text-sm max-w-full truncate;
             }
 
             .price-change {
@@ -500,415 +401,101 @@
     }
 
     #coin-details-page {
-        @apply py-12 px-4 sm:px-6 mx-auto max-w-360 size-full grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 items-center gap-6 xl:gap-10 justify-center;
+        @apply w-full grid grid-cols-1 xl:grid-cols-3 items-start gap-6;
 
         .primary {
-            @apply size-full xl:col-span-2;
+            @apply w-full min-w-0 xl:col-span-2;
         }
 
         .secondary {
-            @apply size-full max-lg:mt-8 lg:col-span-1;
-        }
-
-        .exchange-section {
-            @apply w-full mt-8 space-y-4;
-
-            h4 {
-                @apply text-xl md:text-2xl font-semibold mb-2;
-            }
-        }
-
-        .exchange-table {
-            @apply bg-dark-500 rounded-xl overflow-hidden mt-5;
-
-            .exchange-name {
-                @apply text-green-500 font-bold;
-
-                a {
-                    @apply absolute inset-0 z-10;
-                }
-            }
-
-            .pair {
-                @apply font-medium h-full flex gap-1 py-4 pr-5 space-x-2;
-
-                p {
-                    @apply truncate max-w-20 md:max-w-30 h-full;
-                }
-            }
-
-            .price-cell {
-                @apply font-medium;
-            }
-
-            .time-cell {
-                @apply pr-5 text-end;
-            }
-        }
-
-        .details {
-            @apply w-full mt-8 space-y-4;
-
-            h4 {
-                @apply text-xl md:text-2xl font-semibold mb-2 pb-3;
-            }
-
-            .details-grid {
-                @apply rounded-lg grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 gap-3 sm:gap-5;
-
-                li {
-                    @apply text-base bg-dark-500 px-5 py-6 rounded-lg flex flex-col gap-3;
-
-                    .label {
-                        @apply text-purple-100;
-                    }
-
-                    .link {
-                        @apply flex items-center text-green-500 gap-1;
-                    }
-                }
-            }
+            @apply w-full min-w-0 xl:col-span-1;
         }
     }
 
     #coins-page {
-        @apply py-12 px-4 sm:px-6 mx-auto max-w-360 size-full items-center gap-10 justify-center;
+        @apply w-full;
 
         .content {
-            @apply flex flex-col w-full space-y-5;
-        }
-
-        h4 {
-            @apply text-2xl;
-        }
-
-        .coins-table {
-            @apply bg-dark-500 rounded-xl max-h-fit overflow-hidden;
-
-            .rank-cell {
-                @apply pl-5 max-w-20! py-5 font-medium text-purple-100;
-
-                a {
-                    @apply absolute inset-0 z-10;
-                }
-            }
-
-            .token-cell {
-                @apply py-3 font-semibold;
-
-                .token-info {
-                    @apply flex items-center gap-3;
-
-                    p {
-                        @apply max-w-full truncate;
-                    }
-                }
-            }
-
-            .price-cell {
-                @apply py-4 font-medium;
-            }
-
-            .change-cell {
-                @apply font-medium;
-            }
-
-            .change-value {
-                @apply flex gap-1 items-center font-medium;
-            }
-
-            .market-cap-cell {
-                @apply pr-5 font-medium;
-            }
-        }
-    }
-
-    #search-modal {
-        .trigger {
-            @apply px-6 hover:bg-transparent! font-medium transition-all h-full cursor-pointer text-base text-purple-100 flex items-center gap-2;
-        }
-
-        .kbd {
-            @apply pointer-events-none hidden sm:inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100;
-        }
-
-        .dialog {
-            @apply bg-dark-400! max-w-sm sm:max-w-md md:max-w-2xl mx-auto;
-        }
-
-        .cmd-input {
-            @apply bg-dark-500!;
-
-            input {
-                @apply placeholder:text-purple-100!;
-            }
-        }
-
-        .list {
-            @apply bg-dark-500 max-h-100;
-        }
-
-        .heading {
-            @apply flex items-center gap-2 text-purple-100;
-        }
-
-        .group {
-            @apply bg-dark-500 text-purple-100;
-        }
-    }
-
-    .dialog {
-        .empty {
-            @apply py-6 text-center text-sm text-gray-400;
-        }
-
-        .search-item {
-            @apply grid grid-cols-4 gap-4 items-center justify-between data-[selected=true]:bg-dark-400 transition-all !cursor-pointer hover:bg-dark-400 py-3;
-
-            .coin-info {
-                @apply flex gap-4 items-center col-span-2;
-
-                img {
-                    @apply size-9 rounded-full;
-                }
-
-                div {
-                    @apply flex flex-col;
-                }
-
-                .coin-symbol {
-                    @apply text-sm text-purple-100 uppercase;
-                }
-            }
-
-            .coin-price {
-                @apply font-semibold text-sm lg:text-base;
-            }
-
-            .coin-change {
-                @apply flex gap-1 text-sm lg:text-base items-center font-medium;
-            }
-        }
-    }
-
-    #converter {
-        @apply w-full space-y-5;
-
-        h4 {
-            @apply text-2xl font-semibold;
-        }
-
-        .panel {
-            @apply space-y-2 bg-dark-500 px-5 py-7 rounded-lg;
-        }
-
-        .input-wrapper {
-            @apply bg-dark-400 h-12 w-full rounded-md flex items-center justify-between py-4 pr-4;
-
-            .input {
-                @apply flex-1 text-lg! border-none font-medium bg-dark-400! focus-visible:ring-0 shadow-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none;
-            }
-
-            .coin-info {
-                @apply flex items-center gap-1;
-
-                p {
-                    @apply font-semibold text-base text-purple-100;
-                }
-            }
-        }
-
-        .divider {
-            @apply relative flex justify-center items-center my-4;
-
-            .line {
-                @apply h-px z-10 w-full bg-dark-400 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
-            }
-
-            .icon {
-                @apply size-8 z-20 bg-dark-400 rounded-full p-2 text-green-500;
-            }
-        }
-
-        .output-wrapper {
-            @apply bg-dark-400 h-12 w-full rounded-md flex items-center justify-between py-4 pl-4;
-
-            p {
-                @apply text-base font-medium;
-            }
-
-            .select-trigger {
-                @apply w-fit! border-none! cursor-pointer! h-12! bg-dark-400! hover:bg-dark-400! focus-visible:ring-0!;
-
-                .select-value {
-                    @apply font-semibold! text-xs! text-purple-100!;
-                }
-            }
-
-            .select-content[data-converter] {
-                @apply bg-dark-400 max-h-125;
-
-                .select-item {
-                    @apply cursor-pointer hover:bg-dark-500!;
-                }
-            }
-        }
-    }
-
-    #top-gainers-losers {
-        @apply mt-8 w-full;
-
-        .tabs-list {
-            @apply size-full! p-1! bg-transparent! border-b! border-dark-500! rounded-none!;
-        }
-
-        .tabs-trigger {
-            @apply data-[state=active]:border-none! data-[state=active]:bg-transparent! flex justify-start! mb-0! py-2! text-lg! font-semibold! md:text-2xl!;
-        }
-
-        .tabs-content {
-            @apply gap-4! mt-2! md:gap-5! sm:grid-cols-2! lg:grid-cols-1! grid!;
+            @apply flex flex-col w-full space-y-6;
         }
     }
 
     #coin-header {
-        @apply space-y-5 w-full;
-
-        h3 {
-            @apply text-3xl font-medium;
-        }
-
-        .info {
-            @apply flex gap-3 items-center;
-
-            img {
-                @apply size-11.25 sm:size-12.5 xl:size-19.25;
-            }
-        }
-
-        .price-row {
-            @apply flex gap-4;
-
-            h1 {
-                @apply text-3xl sm:text-5xl xl:text-6xl font-semibold;
-            }
-        }
-
-        .stats {
-            @apply grid grid-cols-3 mt-8 gap-4 sm:gap-6 w-fit;
-
-            li {
-                @apply text-base border-r last:border-none border-purple-600 flex flex-col gap-2;
-
-                .label {
-                    @apply text-purple-100 max-sm:text-sm;
-                }
-
-                .value {
-                    @apply flex gap-1 flex-1 items-end text-base font-medium;
-                }
-            }
-        }
+        @apply w-full;
     }
 
     #coin-overview {
-        @apply w-full h-full xl:col-span-2 px-2 bg-dark-500 rounded-xl;
-
-        .header {
-            @apply flex-1 mb-2 flex gap-2 md:gap-3;
-
-            img {
-                @apply w-10 h-10 md:w-14 md:h-14;
-            }
-
-            .info {
-                @apply flex flex-col;
-
-                p {
-                    @apply flex text-purple-100 text-xs md:text-sm w-fit;
-                }
-
-                h1 {
-                    @apply text-xl md:text-2xl font-semibold;
-                }
-            }
-        }
+        @apply w-full h-full xl:col-span-2 bg-[#0a101d]/90 rounded-2xl;
     }
 
     #coins-pagination {
+        @apply pt-2;
+
         .pagination-content {
-            @apply flex w-full;
+            @apply flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 w-full;
         }
 
         .pagination-control {
-            @apply bg-dark-400 rounded-sm py-1;
+            @apply rounded-xl border border-white/10 bg-[#0a101d] transition hover:border-emerald-500/40 hover:bg-white/[0.06];
 
             &.prev {
-                @apply pr-2;
+                @apply pr-1;
             }
 
             &.next {
-                @apply pl-2;
+                @apply pl-1;
             }
         }
 
         .control-button {
-            @apply cursor-pointer;
+            @apply cursor-pointer text-slate-200 hover:text-white hover:bg-transparent!;
         }
 
         .control-disabled {
-            @apply pointer-events-none opacity-50;
+            @apply pointer-events-none opacity-40 text-slate-500;
         }
 
         .pagination-pages {
-            @apply flex flex-1 justify-center gap-2;
+            @apply flex flex-wrap items-center justify-center gap-1 sm:gap-1.5;
 
             .ellipsis {
-                @apply px-3 py-2 text-base;
+                @apply px-2 py-1 text-sm text-slate-500 font-mono;
             }
 
             .page-link {
-                @apply hover:bg-dark-400! rounded-sm text-base cursor-pointer;
+                @apply rounded-xl border border-white/[0.07] bg-[#0a101d] text-slate-300 hover:border-emerald-500/40 hover:bg-white/[0.06]! hover:text-white font-mono text-xs sm:text-sm cursor-pointer transition size-9 sm:size-10;
             }
 
             .page-link-active {
-                @apply bg-green-500! text-dark-900 font-semibold;
+                @apply border-emerald-500/50! bg-emerald-500! text-slate-950! font-bold shadow-md shadow-emerald-500/20 hover:bg-emerald-400! hover:text-slate-950!;
             }
         }
     }
 
     #live-data-wrapper {
-        @apply size-full xl:col-span-2;
+        @apply w-full min-w-0 xl:col-span-2;
 
         .divider {
-            @apply my-8! bg-purple-600!;
+            @apply my-6! bg-white/10!;
         }
 
         .trend {
             @apply w-full;
-
-            h4 {
-                @apply text-xl md:text-2xl font-semibold mb-2 mt-2 pl-2;
-            }
         }
 
         .trades {
-            @apply w-full my-8 space-y-4;
-
-            h4 {
-                @apply text-xl md:text-2xl font-semibold mb-2;
-            }
+            @apply w-full space-y-4;
         }
 
         .trades-table {
-            @apply bg-dark-500 mt-5 rounded-xl overflow-hidden;
+            @apply bg-[#0a101d] mt-3 rounded-xl overflow-hidden;
 
             .price-cell {
-                @apply pl-5 py-5 font-medium;
+                @apply pl-4 sm:pl-5 py-3.5 font-medium;
             }
 
             .amount-cell {
-                @apply py-4 font-medium;
+                @apply py-3.5 font-medium;
             }
 
             .value-cell {
@@ -920,7 +507,7 @@
             }
 
             .time-cell {
-                @apply pr-5;
+                @apply pr-4 sm:pr-5;
             }
         }
     }
@@ -928,8 +515,8 @@
 
 /* Custom Scrollbar Styles */
 .custom-scrollbar::-webkit-scrollbar {
-    width: 7px;
-    height: 7px;
+    width: 6px;
+    height: 6px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-track {
@@ -937,12 +524,12 @@
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: #1e2833;
+    background: #1e293b;
     border-radius: 8px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: #171a34;
+    background: #334155;
 }
 
 /* Table Custom Scrollbar */
@@ -951,8 +538,8 @@
 }
 
 .custom-scrollbar [data-slot='table-container']::-webkit-scrollbar {
-    width: 7px;
-    height: 7px;
+    width: 6px;
+    height: 6px;
 }
 
 .custom-scrollbar [data-slot='table-container']::-webkit-scrollbar-track {
@@ -960,466 +547,12 @@
 }
 
 .custom-scrollbar [data-slot='table-container']::-webkit-scrollbar-thumb {
-    background: #1e2833;
+    background: #1e293b;
     border-radius: 8px;
 }
 
 .custom-scrollbar [data-slot='table-container']::-webkit-scrollbar-thumb:hover {
-    background: #171a34;
-}/* =========================
-   SEARCH TRIGGER
-========================= */
-
-.search-trigger {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-
-    padding: 0;
-
-    border: 0;
-    cursor: pointer;
-
-    font: inherit;
-    background: transparent;
-}
-
-/* =========================
-   SEARCH MODAL
-========================= */
-
-.search-modal-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 99999;
-
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-
-    padding: 100px 20px 30px;
-
-    background: rgba(3, 2, 10, 0.78);
-
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-}
-
-.search-modal {
-    width: min(680px, 100%);
-    max-height: calc(100vh - 130px);
-
-    display: flex;
-    flex-direction: column;
-
-    overflow: hidden;
-
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 24px;
-
-    background:
-            radial-gradient(
-                    circle at top right,
-                    rgba(129, 75, 255, 0.18),
-                    transparent 42%
-            ),
-            #0c0915;
-
-    box-shadow:
-            0 35px 100px rgba(0, 0, 0, 0.65),
-            inset 0 1px 0
-            rgba(255, 255, 255, 0.05);
-
-    animation: search-modal-open 180ms ease-out;
-}
-
-.search-modal-header {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 20px;
-
-    padding: 26px 26px 18px;
-}
-
-.search-modal-header h2 {
-    margin: 3px 0 0;
-
-    color: #ffffff;
-    font-size: 30px;
-    line-height: 1.1;
-}
-
-.search-modal-label {
-    margin: 0;
-
-    color: rgba(195, 170, 255, 0.65);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-}
-
-.search-modal-close {
-    width: 40px;
-    height: 40px;
-
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    flex-shrink: 0;
-
-    border: 1px solid
-    rgba(255, 255, 255, 0.08);
-    border-radius: 12px;
-
-    color: rgba(255, 255, 255, 0.7);
-    background: rgba(255, 255, 255, 0.04);
-
-    cursor: pointer;
-}
-
-.search-modal-close:hover {
-    color: #ffffff;
-    background: rgba(255, 255, 255, 0.09);
-}
-
-/* =========================
-   INPUT
-========================= */
-
-.search-input-wrapper {
-    position: relative;
-
-    margin: 0 26px 18px;
-}
-
-.search-modal-input {
-    width: 100%;
-    height: 58px;
-
-    padding: 0 52px;
-
-    border: 1px solid
-    rgba(255, 255, 255, 0.1);
-    border-radius: 16px;
-    outline: none;
-
-    color: #ffffff;
-    background: rgba(255, 255, 255, 0.055);
-
-    font: inherit;
-    font-size: 16px;
-}
-
-.search-modal-input::placeholder {
-    color: rgba(255, 255, 255, 0.33);
-}
-
-.search-modal-input:focus {
-    border-color: rgba(153, 108, 255, 0.7);
-
-    box-shadow: 0 0 0 4px
-    rgba(139, 92, 246, 0.12);
-}
-
-.search-input-icon {
-    position: absolute;
-    top: 50%;
-    left: 18px;
-
-    color: rgba(255, 255, 255, 0.4);
-
-    pointer-events: none;
-    transform: translateY(-50%);
-}
-
-.search-input-clear {
-    position: absolute;
-    top: 50%;
-    right: 15px;
-
-    width: 30px;
-    height: 30px;
-
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    border: 0;
-    border-radius: 9px;
-
-    color: rgba(255, 255, 255, 0.55);
-    background: transparent;
-
-    cursor: pointer;
-    transform: translateY(-50%);
-}
-
-.search-input-clear:hover {
-    color: #ffffff;
-    background: rgba(255, 255, 255, 0.08);
-}
-
-/* =========================
-   CONTENT
-========================= */
-
-.search-modal-content {
-    min-height: 250px;
-
-    padding: 0 14px 14px;
-
-    overflow-y: auto;
-}
-
-.search-state {
-    min-height: 250px;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 14px;
-
-    padding: 30px;
-
-    color: rgba(255, 255, 255, 0.45);
-    text-align: center;
-}
-
-.search-state p {
-    margin: 0;
-}
-
-.search-error {
-    color: #fb7185;
-}
-
-.search-spinner {
-    animation: search-spin 700ms linear infinite;
-}
-
-/* =========================
-   RESULTS
-========================= */
-
-.search-results {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-
-    margin: 0;
-    padding: 0;
-
-    list-style: none;
-}
-
-.search-result {
-    width: 100%;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-
-    padding: 13px 14px;
-
-    border: 1px solid transparent;
-    border-radius: 15px;
-
-    color: inherit;
-    background: transparent;
-
-    text-align: left;
-    cursor: pointer;
-
-    transition:
-            border-color 160ms ease,
-            background-color 160ms ease,
-            transform 160ms ease;
-}
-
-.search-result:hover {
-    border-color: rgba(153, 109, 255, 0.22);
-    background: rgba(139, 92, 246, 0.09);
-
-    transform: translateX(3px);
-}
-
-.search-result-main {
-    min-width: 0;
-
-    display: flex;
-    align-items: center;
-    gap: 13px;
-}
-
-.search-result-image {
-    width: 42px;
-    height: 42px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    flex-shrink: 0;
-    overflow: hidden;
-
-    border: 1px solid
-    rgba(255, 255, 255, 0.08);
-    border-radius: 50%;
-
-    background: rgba(255, 255, 255, 0.05);
-}
-
-.search-result-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.search-result-info {
-    min-width: 0;
-
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-}
-
-.search-result-info strong {
-    overflow: hidden;
-
-    color: rgba(255, 255, 255, 0.94);
-    font-size: 15px;
-
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.search-result-info > span {
-    color: rgba(255, 255, 255, 0.38);
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-}
-
-.search-result-rank {
-    flex-shrink: 0;
-
-    padding: 5px 9px;
-
-    border: 1px solid
-    rgba(255, 255, 255, 0.07);
-    border-radius: 8px;
-
-    color: rgba(255, 255, 255, 0.42);
-    background: rgba(255, 255, 255, 0.035);
-
-    font-size: 12px;
-    font-weight: 600;
-}
-
-/* =========================
-   FOOTER
-========================= */
-
-.search-modal-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 15px;
-
-    padding: 14px 26px;
-
-    border-top: 1px solid
-    rgba(255, 255, 255, 0.07);
-
-    color: rgba(255, 255, 255, 0.3);
-    background: rgba(0, 0, 0, 0.12);
-
-    font-size: 11px;
-}
-
-/* =========================
-   ANIMATIONS
-========================= */
-
-@keyframes search-modal-open {
-    from {
-        opacity: 0;
-        transform: translateY(-12px) scale(0.98);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-}
-
-@keyframes search-spin {
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-/* =========================
-   MOBILE
-========================= */
-
-@media (max-width: 640px) {
-    .search-modal-overlay {
-        padding: 72px 12px 18px;
-    }
-
-    .search-modal {
-        max-height: calc(100vh - 90px);
-        border-radius: 19px;
-    }
-
-    .search-modal-header {
-        padding: 20px 18px 16px;
-    }
-
-    .search-input-wrapper {
-        margin: 0 18px 14px;
-    }
-
-    .search-modal-content {
-        min-height: 220px;
-        padding: 0 8px 10px;
-    }
-
-    .search-state {
-        min-height: 220px;
-    }
-
-    .search-modal-footer {
-        padding: 13px 18px;
-    }
-
-    .search-trigger span {
-        display: none;
-    }
-}
-
-
-/* =========================
-   NEXUSFI PRO THEME OVERRIDES
-========================= */
-.dark {
-    --dark-900: #04070e;
-    --dark-700: #050811;
-    --dark-500: #0a101d;
-    --dark-400: #111a2e;
-    --purple-600: #16233b;
-    --purple-100: #94a3b8;
-    --green-500: #10b981;
-    --green-400: #34d399;
-    --green-300: #6ee7b7;
-    --red-500: #f43f5e;
-    --yellow-500: #f59e0b;
+    background: #334155;
 }
 
 @keyframes nexus-marquee-scroll {

@@ -177,7 +177,7 @@ const CoinHeader = ({
 
             {/* 24h Range Progress Bar & KPIs */}
             <div className="mt-6 grid grid-cols-1 gap-5 border-t border-white/[0.07] pt-5 lg:grid-cols-2">
-                <ul className="grid grid-cols-3 gap-3">
+                <ul className="grid grid-cols-1 gap-2.5 sm:grid-cols-3 sm:gap-3">
                     {stats.map((stat) => (
                         <li
                             key={stat.label}
@@ -210,14 +210,14 @@ const CoinHeader = ({
                 </ul>
 
                 <div className="flex flex-col justify-center rounded-xl border border-white/[0.05] bg-black/25 p-3.5">
-                    <div className="mb-1.5 flex items-center justify-between text-xs text-slate-400">
+                    <div className="mb-1.5 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-400">
                         <span>
                             24h Low:{' '}
                             <strong className="font-mono text-slate-200">
                                 {formatCurrency(low)}
                             </strong>
                         </span>
-                        <span className="font-mono text-[10px] text-emerald-400 uppercase">
+                        <span className="hidden font-mono text-[10px] text-emerald-400 uppercase sm:inline">
                             24h Price Band
                         </span>
                         <span>
