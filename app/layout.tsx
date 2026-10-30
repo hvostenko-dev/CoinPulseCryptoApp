@@ -28,8 +28,9 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en" className="dark">
+        <html lang="en" className="dark" suppressHydrationWarning>
             <body
+                suppressHydrationWarning
                 className={`${geistSans.variable} ${geistMono.variable} min-h-screen bg-[#050811] pb-20 text-slate-100 antialiased lg:pb-0`}
             >
                 <NexusProvider>
